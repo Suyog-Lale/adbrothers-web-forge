@@ -1,18 +1,11 @@
 import { useState } from "react";
+import { Link, NavLink } from "react-router-dom"; // Make sure these are imported
 import { Menu, X, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/ad-brothers-logo.jpg";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false);
-    }
-  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border">
@@ -31,30 +24,55 @@ const Navbar = () => {
 
         {/* Main navbar */}
         <div className="flex items-center justify-between py-4">
-          <div className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3" onClick={() => setIsOpen(false)}>
             <img src={logo} alt="A&D Brothers Logo" className="w-12 h-12 object-contain" />
             <div>
               <h1 className="text-xl font-bold text-primary">A&D BROTHERS</h1>
               <p className="text-xs text-muted-foreground hidden sm:block">Fabrication | Sandblasting | Painting</p>
             </div>
-          </div>
+          </Link>
 
-          {/* Desktop Navigation */}
+          {/* --- DESKTOP NAV --- */}
           <div className="hidden md:flex items-center gap-6">
-            <button onClick={() => scrollToSection("about")} className="text-sm hover:text-primary transition-colors">
-              About
-            </button>
-            <button onClick={() => scrollToSection("services")} className="text-sm hover:text-primary transition-colors">
+            
+            {/* === THIS LINK IS CHANGED === */}
+            <NavLink
+              to="/"
+              end // The 'end' prop stops it from matching other pages
+              className={({ isActive }) =>
+                `text-sm hover:text-primary transition-colors ${isActive ? "text-primary font-medium" : ""}`
+              }
+            >
+              Home
+            </NavLink>
+            {/* === END OF CHANGE === */}
+            
+            <NavLink
+              to="/services"
+              className={({ isActive }) =>
+                `text-sm hover:text-primary transition-colors ${isActive ? "text-primary font-medium" : ""}`
+              }
+            >
               Services
-            </button>
-            <button onClick={() => scrollToSection("equipment")} className="text-sm hover:text-primary transition-colors">
+            </NavLink>
+            <NavLink
+              to="/equipment"
+              className={({ isActive }) =>
+                `text-sm hover:text-primary transition-colors ${isActive ? "text-primary font-medium" : ""}`
+              }
+            >
               Equipment
-            </button>
-            <button onClick={() => scrollToSection("clients")} className="text-sm hover:text-primary transition-colors">
+            </NavLink>
+            <NavLink
+              to="/clients"
+              className={({ isActive }) =>
+                `text-sm hover:text-primary transition-colors ${isActive ? "text-primary font-medium" : ""}`
+              }
+            >
               Clients
-            </button>
-            <Button variant="hero" onClick={() => scrollToSection("quote")} size="sm">
-              Get Quote
+            </NavLink>
+            <Button asChild variant="hero" size="sm">
+              <Link to="/get-quote">Get Quote</Link>
             </Button>
           </div>
 
@@ -68,23 +86,45 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* --- MOBILE NAV --- */}
         {isOpen && (
           <div className="md:hidden py-4 border-t border-border space-y-4">
-            <button onClick={() => scrollToSection("about")} className="block w-full text-left py-2 hover:text-primary transition-colors">
-              About
-            </button>
-            <button onClick={() => scrollToSection("services")} className="block w-full text-left py-2 hover:text-primary transition-colors">
+
+            {/* === THIS LINK IS CHANGED === */}
+            <Link
+              to="/"
+              onClick={() => setIsOpen(false)}
+              className="block w-full text-left py-2 hover:text-primary transition-colors"
+            >
+              Home
+            </Link>
+            {/* === END OF CHANGE === */}
+            
+            <Link
+              to="/services"
+              onClick={() => setIsOpen(false)}
+              className="block w-full text-left py-2 hover:text-primary transition-colors"
+            >
               Services
-            </button>
-            <button onClick={() => scrollToSection("equipment")} className="block w-full text-left py-2 hover:text-primary transition-colors">
+            </Link>
+            <Link
+              to="/equipment"
+              onClick={() => setIsOpen(false)}
+              className="block w-full text-left py-2 hover:text-primary transition-colors"
+            >
               Equipment
-            </button>
-            <button onClick={() => scrollToSection("clients")} className="block w-full text-left py-2 hover:text-primary transition-colors">
+            </Link>
+            <Link
+              to="/clients"
+              onClick={() => setIsOpen(false)}
+              className="block w-full text-left py-2 hover:text-primary transition-colors"
+            >
               Clients
-            </button>
-            <Button variant="hero" onClick={() => scrollToSection("quote")} className="w-full">
-              Get Quote
+            </Link>
+            <Button asChild variant="hero" className="w-full">
+              <Link to="/get-quote" onClick={() => setIsOpen(false)}>
+                Get Quote
+              </Link>
             </Button>
           </div>
         )}
