@@ -35,7 +35,6 @@ const Navbar = () => {
           {/* --- DESKTOP NAV --- */}
           <div className="hidden md:flex items-center gap-6">
             
-            {/* === THIS LINK IS CHANGED === */}
             <NavLink
               to="/"
               end // The 'end' prop stops it from matching other pages
@@ -45,7 +44,6 @@ const Navbar = () => {
             >
               Home
             </NavLink>
-            {/* === END OF CHANGE === */}
             
             <NavLink
               to="/services"
@@ -63,6 +61,18 @@ const Navbar = () => {
             >
               Equipment
             </NavLink>
+
+            {/* --- THIS IS THE CORRECTED "OUR WORK" LINK --- */}
+            <NavLink
+              to="/our-work"
+              className={({ isActive }) =>
+                `text-sm hover:text-primary transition-colors ${isActive ? "text-primary font-medium" : ""}`
+              }
+            >
+              Our Work
+            </NavLink>
+            {/* --- The extra/broken links have been removed --- */}
+            
             <NavLink
               to="/clients"
               className={({ isActive }) =>
@@ -90,7 +100,6 @@ const Navbar = () => {
         {isOpen && (
           <div className="md:hidden py-4 border-t border-border space-y-4">
 
-            {/* === THIS LINK IS CHANGED === */}
             <Link
               to="/"
               onClick={() => setIsOpen(false)}
@@ -98,7 +107,6 @@ const Navbar = () => {
             >
               Home
             </Link>
-            {/* === END OF CHANGE === */}
             
             <Link
               to="/services"
@@ -114,6 +122,16 @@ const Navbar = () => {
             >
               Equipment
             </Link>
+
+            {/* --- THIS IS THE CORRECT MOBILE LINK --- */}
+            <Link
+              to="/our-work"
+              onClick={() => setIsOpen(false)}
+              className="block w-full text-left py-2 hover:text-primary transition-colors"
+            >
+              Our Work
+            </Link>
+
             <Link
               to="/clients"
               onClick={() => setIsOpen(false)}

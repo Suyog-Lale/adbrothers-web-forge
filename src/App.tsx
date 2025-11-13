@@ -6,7 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-// --- NEW IMPORTS ---
+
 // Import your new Layout component (we will create this next)
 import AppLayout from "@/layouts/AppLayout"; 
 
@@ -18,7 +18,8 @@ import Equipment from "@/components/Equipment";
 import Clients from "@/components/Clients";
 import QuoteForm from "@/components/QuoteForm";
 import NotFound from "./pages/NotFound";
-// --- END NEW IMPORTS ---
+import OurWork from "@/components/OurWork"; 
+
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const App = () => (
             <Route path="about" element={<About />} />
             <Route path="services" element={<Services />} />
             <Route path="equipment" element={<Equipment />} />
+            <Route path="our-work" element={<OurWork />} /> 
             <Route path="clients" element={<Clients />} />
             <Route path="get-quote" element={<QuoteForm />} />
 
